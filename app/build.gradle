@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 apply from: "${rootProject.projectDir}/common-config.gradle"
@@ -27,4 +29,10 @@ android {
 
 dependencies {
     implementation project(':feature:main')
+
+    implementation libs.androidx.startup
+
+    implementation libs.hilt
+    kapt libs.hilt.compiler
+    kapt libs.kotlin.metadata.jvm
 }

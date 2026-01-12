@@ -11,9 +11,10 @@ collectionsImmutable = "0.4.0"
 coreKtx = "1.17.0"
 androidLifecycle = "2.10.0"
 activityCompose = "1.12.2"
-composeBom = "2025.11.01"
+composeBom = "2025.12.01"
 appcompat = "1.7.1"
 material = "1.13.0"
+androidStartUp = "1.2.0"
 
 hilt = "2.57.2"
 mavericks = "3.0.12"
@@ -32,6 +33,7 @@ androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-co
 androidx-lifecycle-runtime-testing = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidLifecycle" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidStartUp" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -46,6 +48,7 @@ coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 
 mavericks = { group = "com.airbnb.android", name = "mavericks", version.ref = "mavericks" }
 mavericks-navigation = { group = "com.airbnb.android", name = "mavericks-navigation", version.ref = "mavericks" }

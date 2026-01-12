@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 apply from: "${rootProject.projectDir}/common-config.gradle"
@@ -20,6 +21,7 @@ android {
 
 dependencies {
     implementation project(":library:design")
+    implementation project(":library:foundation")
 
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
@@ -30,4 +32,10 @@ dependencies {
     implementation libs.androidx.compose.foundation
     implementation libs.bundles.compose
     debugImplementation libs.androidx.compose.ui.tooling
+
+    implementation libs.bundles.mavericks
+
+    implementation libs.hilt
+    kapt libs.hilt.compiler
+    kapt libs.kotlin.metadata.jvm
 }
