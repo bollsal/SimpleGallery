@@ -1,6 +1,5 @@
-package com.bollsal.simplegallery.ui.theme
+package com.bollsal.simplegallery.library.design.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

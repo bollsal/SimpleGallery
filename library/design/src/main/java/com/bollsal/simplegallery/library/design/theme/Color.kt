@@ -1,4 +1,4 @@
-package com.bollsal.simplegallery.ui.theme
+package com.bollsal.simplegallery.library.design.theme
 
 import androidx.compose.ui.graphics.Color
 

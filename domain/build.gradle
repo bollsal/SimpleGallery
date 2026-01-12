@@ -1,0 +1,18 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+}
+
+apply from: "${rootProject.projectDir}/common-config.gradle"
+
+android {
+    namespace 'com.bollsal.simplegallery.domain'
+
+    kapt {
+        correctErrorTypes = true
+    }
+}
+
+dependencies {
+}

@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "SimpleGallery"
 include ':app'
+include ':feature:main'
+include ':domain'
+include ':library:design'

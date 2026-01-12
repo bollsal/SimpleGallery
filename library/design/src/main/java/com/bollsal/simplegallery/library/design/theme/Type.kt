@@ -1,4 +1,4 @@
-package com.bollsal.simplegallery.ui.theme
+package com.bollsal.simplegallery.library.design.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

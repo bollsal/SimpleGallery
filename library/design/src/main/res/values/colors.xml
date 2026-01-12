@@ -1,0 +1,7 @@
+<resources>
+    <color name="black">#000000</color>
+    <color name="black80">#cc000000</color>
+    <color name="black40">#66000000</color>
+    <color name="black20">#26000000</color>
+    <color name="white">#ffffff</color>
+</resources>

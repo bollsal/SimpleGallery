@@ -1,0 +1,27 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
+}
+
+apply from: "${rootProject.projectDir}/common-config.gradle"
+
+android {
+    namespace 'com.bollsal.simplegallery.library.design'
+
+    buildFeatures {
+        compose true
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+}
+
+dependencies {
+    implementation platform(libs.androidx.compose.bom)
+    api libs.androidx.compose.foundation
+    implementation libs.bundles.compose
+    debugImplementation libs.androidx.compose.ui.tooling
+}

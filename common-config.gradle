@@ -1,0 +1,36 @@
+def versions = [
+        versionCode: 1,
+        versionName: '1.0.0',
+]
+
+ext.versions = versions
+
+android {
+    compileSdk libs.versions.sdk.compile.get().toInteger()
+
+    defaultConfig {
+        minSdk libs.versions.sdk.min.get().toInteger()
+        targetSdk libs.versions.sdk.target.get().toInteger()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(targetJvmVersion)
+        }
+    }
+}
+
+dependencies {
+    implementation libs.timber
+}
