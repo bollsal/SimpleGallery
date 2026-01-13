@@ -53,6 +53,7 @@ kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-
 mavericks = { group = "com.airbnb.android", name = "mavericks", version.ref = "mavericks" }
 mavericks-navigation = { group = "com.airbnb.android", name = "mavericks-navigation", version.ref = "mavericks" }
 mavericks-compose = { group = "com.airbnb.android", name = "mavericks-compose", version.ref = "mavericks" }
+mavericks-hilt = { group = "com.airbnb.android", name = "mavericks-hilt", version.ref = "mavericks" }
 mavericks-mocking = { group = "com.airbnb.android", name = "mavericks-mocking", version.ref = "mavericks" }
 
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
@@ -76,7 +77,7 @@ kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", vers
 
 [bundles]
 coroutines = ["coroutines-core", "coroutines-android"]
-mavericks = ["mavericks", "mavericks-navigation", "mavericks-compose"]
+mavericks = ["mavericks", "mavericks-navigation", "mavericks-compose", "mavericks-hilt"]
 compose = ["androidx-compose-material3", "androidx-compose-ui-tooling-preview"]
 test = ["mockk", "coroutines-test", "kotest-runner", "kotest-assertions"]
 
