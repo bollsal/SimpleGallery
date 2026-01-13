@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_title">일시적인 오류가 발생하였습니다</string>
+    <string name="error_description">잠시 후 다시 시도해주세요</string>
+    <string name="retry">다시 시도</string>
+</resources>

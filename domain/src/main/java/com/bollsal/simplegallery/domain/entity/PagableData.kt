@@ -9,7 +9,7 @@ data class PageableData<T>(
     private const val KEY_LIMIT = "limit"
 
     val defaultNextParam: Map<String, Int> = mapOf(
-      KEY_PAGE to 3,
+      KEY_PAGE to 1,
       KEY_LIMIT to 20
     )
 
