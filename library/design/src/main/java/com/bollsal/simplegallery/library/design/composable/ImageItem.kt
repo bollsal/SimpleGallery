@@ -1,4 +1,4 @@
-package com.bollsal.simplegallery.library.design
+package com.bollsal.simplegallery.library.design.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bollsal.simplegallery.library.design.rememberInteractionSource
 import com.bollsal.simplegallery.library.design.theme.LocalShapes
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.LocalTypography
@@ -39,6 +41,7 @@ fun SingleImageItem(
     modifier = modifier
       .fillMaxWidth()
       .height(72.dp)
+      .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp))
       .background(LocalSimpleGalleryColor.current.background)
       .clickable(
         interactionSource = rememberInteractionSource(),
@@ -54,7 +57,7 @@ fun SingleImageItem(
         .background(Color.Red)
     ) {
       // TODO : 이후 이미지 교체 필요
-      Text(text = "이미지")
+      Text(text = imageUrl)
     }
 
     Text(
@@ -90,7 +93,7 @@ fun MultipleImageItem(
         .background(Color.Red)
     ) {
       // TODO : 이후 이미지 교체 필요
-      Text(text = "이미지")
+      Text(text = imageUrl)
     }
 
     Text(

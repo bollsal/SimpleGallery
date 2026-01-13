@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.sp
 data class Colors(
   val background: Color,
   val textColor: Color,
-  val rippleColor: Color
+  val rippleColor: Color,
+  val progressColor: Color
 )
 
 @Immutable
@@ -39,7 +40,8 @@ val LocalSimpleGalleryColor = staticCompositionLocalOf {
   Colors(
     background = Color.Unspecified,
     textColor = Color.Unspecified,
-    rippleColor = Color.Unspecified
+    rippleColor = Color.Unspecified,
+    progressColor = Color.Unspecified
   )
 }
 
@@ -62,12 +64,14 @@ fun SimpleGalleryTheme(content: @Composable () -> Unit) {
   val lightColor = Colors(
     background = Color(0xFFFFFFFF),
     textColor = Color(0xFF000000),
-    rippleColor = Color(0x08000000)
+    rippleColor = Color(0x08000000),
+    progressColor = Color(0xFF000000)
   )
   val darkColor = Colors(
     background = Color(0xFF202020),
     textColor = Color(0xFFFFFFFF),
-    rippleColor = Color(0x0FFFFFFF)
+    rippleColor = Color(0x0FFFFFFF),
+    progressColor = Color(0xFFFFFFFF)
   )
 
   val typography = Typography(
