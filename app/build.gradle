@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    implementation project(":library:network")
     implementation project(':feature:main')
 
     implementation libs.androidx.startup
