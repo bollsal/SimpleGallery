@@ -33,6 +33,10 @@
                 android:name="com.bollsal.simplegallery.library.foundation.initializer.MavericksInitializer"
                 android:value="androidx.startup" />
 
+            <meta-data
+                android:name="com.bollsal.simplegallery.library.foundation.initializer.TimberInitializer"
+                android:value="androidx.startup" />
+
         </provider>
     </application>
 
