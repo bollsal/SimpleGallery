@@ -20,10 +20,16 @@ android {
 }
 
 dependencies {
+    implementation project(":library:foundation")
+
     implementation libs.material
 
     implementation platform(libs.androidx.compose.bom)
     api libs.androidx.compose.foundation
     implementation libs.bundles.compose
     debugImplementation libs.androidx.compose.ui.tooling
+
+    implementation libs.hilt
+    kapt libs.hilt.compiler
+    kapt libs.kotlin.metadata.jvm
 }
