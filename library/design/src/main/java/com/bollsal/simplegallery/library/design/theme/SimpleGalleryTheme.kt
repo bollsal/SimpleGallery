@@ -68,7 +68,7 @@ fun SimpleGalleryTheme(content: @Composable () -> Unit) {
     textColor = Color(0xFF000000),
     rippleColor = Color(0x08000000),
     progressColor = Color(0xFF000000),
-    placeholder = Color(0x0FFFFFFF)
+    placeholder = Color(0x08000000)
   )
   val darkColor = Colors(
     background = Color(0xFF202020),

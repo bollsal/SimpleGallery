@@ -9,14 +9,17 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -25,7 +28,9 @@ import com.airbnb.mvrx.Incomplete
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.compose.collectAsStateWithLifecycle
 import com.airbnb.mvrx.compose.mavericksViewModel
+import com.bollsal.simplegallery.library.design.R
 import com.bollsal.simplegallery.library.design.composable.Error
+import com.bollsal.simplegallery.library.design.shadowBy
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 
@@ -58,17 +63,21 @@ fun GalleryScreen() {
         .background(LocalSimpleGalleryColor.current.background)
         .systemBarsPadding(),
       topBar = {
-        // TODO : 어떤 형태로 토글기능 적용할지
         TopAppBar(
+          modifier = Modifier.shadowBy(listState),
           title = { Text("Gallery") },
-          navigationIcon = {
-            IconButton(onClick = {
-              viewModel.toggleColumnCount()
-            }) {
+          colors = TopAppBarDefaults.topAppBarColors(containerColor = LocalSimpleGalleryColor.current.background),
+          actions = {
+            IconButton(onClick = viewModel::toggleColumnCount) {
+              Icon(
+                painterResource(R.drawable.toggle),
+                tint = LocalSimpleGalleryColor.current.textColor,
+                contentDescription = null,
+              )
             }
           }
         )
-      }
+      },
     ) { innerPadding ->
       Box(
         modifier = Modifier
