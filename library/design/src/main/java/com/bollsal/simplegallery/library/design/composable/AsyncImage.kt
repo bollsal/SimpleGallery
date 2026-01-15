@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.bollsal.simplegallery.library.design.R
@@ -33,10 +34,28 @@ import dagger.hilt.android.EntryPointAccessors
 @Composable
 fun AsyncImage(
   imageUrl: String,
+  imageWidth: Int,
+  imageHeight: Int,
   modifier: Modifier = Modifier,
   placeholder: Color = LocalSimpleGalleryColor.current.placeholder,
   crossFade: Boolean = true
 ) {
+  if (LocalInspectionMode.current) {
+    Box(
+      modifier = modifier
+        .fillMaxSize()
+        .background(Color.Gray),
+      contentAlignment = Alignment.Center
+    ) {
+      Icon(
+        painter = painterResource(R.drawable.error),
+        tint = Color.White,
+        contentDescription = null
+      )
+    }
+    return
+  }
+
   val context = LocalContext.current
   val imageLoader = remember {
     EntryPointAccessors.fromApplication<ImageLoaderEntryPoint>(context).imageLoader()
@@ -54,7 +73,11 @@ fun AsyncImage(
   )
 
   LaunchedEffect(imageUrl) {
-    bitmap = imageLoader.load(imageUrl)
+    bitmap = imageLoader.load(
+      imageUrl = imageUrl,
+      width = imageWidth,
+      height = imageHeight
+    )
 
     isLoading = false
     isError = bitmap == null

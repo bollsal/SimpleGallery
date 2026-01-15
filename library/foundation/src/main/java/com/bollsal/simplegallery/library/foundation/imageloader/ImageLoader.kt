@@ -36,20 +36,37 @@ class ImageLoader @Inject constructor(@ApplicationContext private val context: C
     )
   }
 
-  suspend fun load(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
+  suspend fun load(
+    imageUrl: String,
+    width: Int,
+    height: Int
+  ): Bitmap? = withContext(Dispatchers.IO) {
     memoryCache.get(imageUrl)?.let { memoryCacheBitmap ->
       return@withContext memoryCacheBitmap
     }
 
     diskCache.get(imageUrl)?.let { diskCacheFile ->
       ensureActive()
-      return@withContext decodeFileToBitmapWithCache(imageUrl, diskCacheFile)
+      return@withContext decodeFileToBitmapWithCache(
+        imageUrl = imageUrl,
+        file = diskCacheFile,
+        width = width,
+        height = height
+      )
     }
 
-    downLoadImageWithCache(imageUrl)
+    downLoadImageWithCache(
+      imageUrl = imageUrl,
+      width = width,
+      height = height
+    )
   }
 
-  private suspend fun downLoadImageWithCache(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
+  private suspend fun downLoadImageWithCache(
+    imageUrl: String,
+    width: Int,
+    height: Int
+  ): Bitmap? = withContext(Dispatchers.IO) {
     ensureActive()
 
     runCatching {
@@ -66,13 +83,22 @@ class ImageLoader @Inject constructor(@ApplicationContext private val context: C
 
     diskCache.get(imageUrl)?.let { file ->
       ensureActive()
-      decodeFileToBitmapWithCache(imageUrl, file)
+      decodeFileToBitmapWithCache(
+        imageUrl = imageUrl,
+        file = file,
+        width = width,
+        height = height
+      )
     }
   }
 
-  private fun decodeFileToBitmapWithCache(imageUrl: String, file: File): Bitmap {
-    // FIXME : size 지정하는 부분 수정
-    val bitmap = decodeFileToBitmap(file, 500, 333)
+  private fun decodeFileToBitmapWithCache(
+    imageUrl: String,
+    file: File,
+    width: Int,
+    height: Int
+  ): Bitmap {
+    val bitmap = decodeFileToBitmap(file, width, height)
     memoryCache.put(imageUrl, bitmap)
     return bitmap
   }

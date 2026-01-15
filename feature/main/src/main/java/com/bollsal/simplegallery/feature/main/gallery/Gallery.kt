@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.compose.collectAsStateWithLifecycle
+import com.bollsal.simplegallery.domain.entity.GalleryImage
+import com.bollsal.simplegallery.domain.entity.ImageSize
 import com.bollsal.simplegallery.library.design.composable.LoadMoreIndicator
 import com.bollsal.simplegallery.library.design.composable.MultipleImageItem
 import com.bollsal.simplegallery.library.design.composable.SingleImageItem
@@ -59,13 +61,15 @@ fun Gallery(
       items = galleryList,
       key = { index, item -> "${item.id}_$index" },
       contentType = { _, _ -> ContentType.CONTENT }
-    ) { index, item ->
+    ) { _, item ->
+      val (resizedWidth, resizedHeight) = rememberResizedSize(item, ImageSize.MEDIUM_512)
+
       if (columnCount == 1) {
         SingleImageItem(
           modifier = Modifier.animateItem(),
-          // FIXME
-          // imageUrl = item.downloadUrl,
-          imageUrl = "$index",
+          imageUrl = item.downloadUrl,
+          imageWidth = resizedWidth,
+          imageHeight = resizedHeight,
           name = item.author,
           onItemClick = {
             onItemClick(item.url)
@@ -74,9 +78,9 @@ fun Gallery(
       } else {
         MultipleImageItem(
           modifier = Modifier.animateItem(),
-          // FIXME
-          // imageUrl = item.downloadUrl,
-          imageUrl = "$index",
+          imageUrl = item.downloadUrl,
+          imageWidth = resizedWidth,
+          imageHeight = resizedHeight,
           name = item.author,
           onItemClick = {
             onItemClick(item.url)
@@ -95,6 +99,14 @@ fun Gallery(
       }
     }
   }
+}
+
+@Composable
+private fun rememberResizedSize(
+  galleryImage: GalleryImage,
+  imageSize: ImageSize
+): Pair<Int, Int> = remember(galleryImage.width, galleryImage.height, imageSize) {
+  galleryImage.calculateScaledSize(imageSize)
 }
 
 enum class ContentType {

@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bollsal.simplegallery.library.design.rememberInteractionSource
@@ -33,6 +32,8 @@ import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 @Composable
 fun SingleImageItem(
   imageUrl: String,
+  imageWidth: Int,
+  imageHeight: Int,
   name: String,
   onItemClick: () -> Unit,
   modifier: Modifier = Modifier
@@ -54,10 +55,12 @@ fun SingleImageItem(
       modifier = Modifier
         .fillMaxHeight()
         .aspectRatio(16 / 9f)
-        .background(Color.Red)
     ) {
-      // TODO : 이후 이미지 교체 필요
-      Text(text = imageUrl)
+      AsyncImage(
+        imageUrl = imageUrl,
+        imageWidth = imageWidth,
+        imageHeight = imageHeight
+      )
     }
 
     Text(
@@ -72,6 +75,8 @@ fun SingleImageItem(
 @Composable
 fun MultipleImageItem(
   imageUrl: String,
+  imageWidth: Int,
+  imageHeight: Int,
   name: String,
   onItemClick: () -> Unit,
   modifier: Modifier = Modifier
@@ -90,10 +95,12 @@ fun MultipleImageItem(
       modifier = Modifier
         .fillMaxHeight()
         .aspectRatio(1f)
-        .background(Color.Red)
     ) {
-      // TODO : 이후 이미지 교체 필요
-      Text(text = imageUrl)
+      AsyncImage(
+        imageUrl = imageUrl,
+        imageWidth = imageWidth,
+        imageHeight = imageHeight
+      )
     }
 
     Text(
@@ -112,6 +119,8 @@ private fun PreviewSingleImageItem() {
     Column {
       SingleImageItem(
         imageUrl = "https://picsum.photos/id/0/5000/3333",
+        imageWidth = 500,
+        imageHeight = 333,
         name = "Alejandro Escamilla",
         onItemClick = {}
       )
@@ -131,6 +140,8 @@ private fun PreviewMultipleImageItem() {
       item {
         MultipleImageItem(
           imageUrl = "https://picsum.photos/id/0/5000/3333",
+          imageWidth = 500,
+          imageHeight = 333,
           name = "Alejandro Escamilla",
           onItemClick = {}
         )
@@ -138,6 +149,8 @@ private fun PreviewMultipleImageItem() {
       item {
         MultipleImageItem(
           imageUrl = "https://picsum.photos/id/1/5000/3333",
+          imageWidth = 500,
+          imageHeight = 333,
           name = "Paul Jarvis",
           onItemClick = {}
         )

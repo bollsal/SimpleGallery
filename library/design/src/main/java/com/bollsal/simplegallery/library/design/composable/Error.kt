@@ -16,10 +16,10 @@ import com.bollsal.simplegallery.library.design.theme.LocalTypography
 
 @Composable
 fun Error(
+  modifier: Modifier = Modifier,
   title: String = stringResource(R.string.error_title),
   message: String = stringResource(R.string.error_description),
   buttonLabel: String = stringResource(R.string.retry),
-  modifier: Modifier = Modifier,
   onClick: () -> Unit = {}
 ) {
   Column(

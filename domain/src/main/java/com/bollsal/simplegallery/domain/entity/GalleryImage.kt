@@ -7,4 +7,11 @@ data class GalleryImage(
   val height: Int,
   val url: String,
   val downloadUrl: String
-)
+) {
+  fun calculateScaledSize(size: ImageSize): Pair<Int, Int> =
+    if (size.width > width) {
+      width to height
+    } else {
+      size.width to size.width * height / width
+    }
+}
