@@ -16,7 +16,10 @@ android {
 }
 
 dependencies {
+    implementation libs.bundles.coroutines
     implementation libs.hilt
     kapt libs.hilt.compiler
     kapt libs.kotlin.metadata.jvm
+
+    implementation libs.bundles.test
 }

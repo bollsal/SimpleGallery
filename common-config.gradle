@@ -29,6 +29,12 @@ android {
             jvmTarget.set(targetJvmVersion)
         }
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
