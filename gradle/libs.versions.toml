@@ -8,7 +8,6 @@ kotlin = "2.3.0"
 
 coroutines = "1.10.2"
 coreKtx = "1.17.0"
-androidLifecycle = "2.10.0"
 activityCompose = "1.12.2"
 composeBom = "2026.01.00"
 appcompat = "1.7.1"
@@ -16,6 +15,7 @@ material = "1.13.0"
 androidStartUp = "1.2.0"
 navigationVersion = "2.9.6"
 kotlinxSerializationJson = "1.9.0"
+collectionsImmutable = "0.4.0"
 
 hilt = "2.57.2"
 mavericks = "3.0.12"
@@ -28,13 +28,10 @@ mockk = "1.14.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidLifecycle" }
-androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidLifecycle" }
-androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "androidLifecycle" }
-androidx-lifecycle-runtime-testing = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidLifecycle" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidStartUp" }
+collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "collectionsImmutable" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -57,7 +54,6 @@ mavericks = { group = "com.airbnb.android", name = "mavericks", version.ref = "m
 mavericks-navigation = { group = "com.airbnb.android", name = "mavericks-navigation", version.ref = "mavericks" }
 mavericks-compose = { group = "com.airbnb.android", name = "mavericks-compose", version.ref = "mavericks" }
 mavericks-hilt = { group = "com.airbnb.android", name = "mavericks-hilt", version.ref = "mavericks" }
-mavericks-mocking = { group = "com.airbnb.android", name = "mavericks-mocking", version.ref = "mavericks" }
 
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
@@ -69,7 +65,6 @@ retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
-okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 

@@ -14,10 +14,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.Loading
-import com.airbnb.mvrx.compose.collectAsStateWithLifecycle
 import com.bollsal.simplegallery.domain.entity.GalleryImage
 import com.bollsal.simplegallery.domain.entity.ImageSize
+import com.bollsal.simplegallery.domain.entity.PageableData
 import com.bollsal.simplegallery.library.design.composable.LoadMoreIndicator
 import com.bollsal.simplegallery.library.design.composable.MultipleImageItem
 import com.bollsal.simplegallery.library.design.composable.SingleImageItem
@@ -25,14 +26,13 @@ import com.bollsal.simplegallery.library.design.composable.SingleImageItem
 @Composable
 fun Gallery(
   listState: LazyGridState,
-  viewModel: GalleryViewModel,
+  galleryList: List<GalleryImage>,
+  pagingRequest: Async<PageableData<GalleryImage>?>,
+  columnCount: Int,
+  onLoadMore: () -> Unit,
   onItemClick: (String) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val galleryList by viewModel.collectAsStateWithLifecycle(GalleryState::galleryList)
-  val pagingRequest by viewModel.collectAsStateWithLifecycle(GalleryState::pagingRequest)
-  val columnCount by viewModel.collectAsStateWithLifecycle(GalleryState::columnCount)
-
   val loadMore by remember(galleryList) {
     derivedStateOf {
       listState.layoutInfo.visibleItemsInfo.lastOrNull()
@@ -45,7 +45,7 @@ fun Gallery(
 
   LaunchedEffect(loadMore) {
     if (loadMore == true) {
-      viewModel.fetchLoadMore()
+      onLoadMore()
     }
   }
 

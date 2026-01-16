@@ -30,10 +30,12 @@ import com.airbnb.mvrx.compose.collectAsStateWithLifecycle
 import com.airbnb.mvrx.compose.mavericksViewModel
 import com.bollsal.simplegallery.feature.main.GalleryNavigation
 import com.bollsal.simplegallery.library.design.R
+import com.bollsal.simplegallery.library.design.composable.Empty
 import com.bollsal.simplegallery.library.design.composable.Error
 import com.bollsal.simplegallery.library.design.shadowBy
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
+import kotlinx.collections.immutable.toPersistentList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,6 +45,9 @@ fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
     val listState = rememberLazyGridState()
 
     val viewModel: GalleryViewModel = mavericksViewModel()
+    val galleryList by viewModel.collectAsStateWithLifecycle(GalleryState::galleryList)
+    val pagingRequest by viewModel.collectAsStateWithLifecycle(GalleryState::pagingRequest)
+    val columnCount by viewModel.collectAsStateWithLifecycle(GalleryState::columnCount)
     val initialRequest by viewModel.collectAsStateWithLifecycle(GalleryState::initialRequest)
 
     DisposableEffect(lifecycleOwner) {
@@ -103,13 +108,22 @@ fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
           }
 
           is Success -> {
-            Gallery(
-              listState = listState,
-              viewModel = viewModel,
-              onItemClick = { url ->
-                navigation(GalleryNavigation.NavigateToDetail(url))
-              }
-            )
+            if (galleryList.isEmpty()) {
+              Empty(modifier = Modifier.fillMaxSize())
+            } else {
+              Gallery(
+                listState = listState,
+                galleryList = galleryList.toPersistentList(),
+                pagingRequest = pagingRequest,
+                columnCount = columnCount,
+                onLoadMore = {
+                  viewModel.fetchLoadMore()
+                },
+                onItemClick = { url ->
+                  navigation(GalleryNavigation.NavigateToDetail(url))
+                }
+              )
+            }
           }
 
           is Fail -> {
