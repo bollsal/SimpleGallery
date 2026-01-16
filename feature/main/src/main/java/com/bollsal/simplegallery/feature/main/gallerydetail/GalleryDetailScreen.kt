@@ -29,13 +29,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.viewinterop.AndroidView
+import com.bollsal.simplegallery.feature.main.GalleryDetailNavigation
 import com.bollsal.simplegallery.library.design.R
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GalleryDetailScreen(url: String) {
+fun GalleryDetailScreen(
+  url: String,
+  navigation: (GalleryDetailNavigation) -> Unit
+) {
   var webView by remember { mutableStateOf<WebView?>(null) }
   var canGoBack by remember { mutableStateOf(false) }
   var canGoForward by remember { mutableStateOf(false) }
@@ -63,9 +67,7 @@ fun GalleryDetailScreen(url: String) {
           },
           colors = TopAppBarDefaults.topAppBarColors(containerColor = LocalSimpleGalleryColor.current.background),
           navigationIcon = {
-            IconButton(onClick = {
-              // TODO
-            }) {
+            IconButton(onClick = { navigation(GalleryDetailNavigation.Back) }) {
               Icon(
                 painterResource(R.drawable.back),
                 tint = LocalSimpleGalleryColor.current.textColor,

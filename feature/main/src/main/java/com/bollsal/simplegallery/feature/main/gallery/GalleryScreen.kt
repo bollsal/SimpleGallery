@@ -28,6 +28,7 @@ import com.airbnb.mvrx.Incomplete
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.compose.collectAsStateWithLifecycle
 import com.airbnb.mvrx.compose.mavericksViewModel
+import com.bollsal.simplegallery.feature.main.GalleryNavigation
 import com.bollsal.simplegallery.library.design.R
 import com.bollsal.simplegallery.library.design.composable.Error
 import com.bollsal.simplegallery.library.design.shadowBy
@@ -36,7 +37,7 @@ import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GalleryScreen() {
+fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
   SimpleGalleryTheme {
     val lifecycleOwner = LocalLifecycleOwner.current
     val listState = rememberLazyGridState()
@@ -65,7 +66,12 @@ fun GalleryScreen() {
       topBar = {
         TopAppBar(
           modifier = Modifier.shadowBy(listState),
-          title = { Text("Gallery") },
+          title = {
+            Text(
+              text = "Gallery",
+              color = LocalSimpleGalleryColor.current.textColor
+            )
+          },
           colors = TopAppBarDefaults.topAppBarColors(containerColor = LocalSimpleGalleryColor.current.background),
           actions = {
             IconButton(onClick = viewModel::toggleColumnCount) {
@@ -101,7 +107,7 @@ fun GalleryScreen() {
               listState = listState,
               viewModel = viewModel,
               onItemClick = { url ->
-                // TODO navigation
+                navigation(GalleryNavigation.NavigateToDetail(url))
               }
             )
           }

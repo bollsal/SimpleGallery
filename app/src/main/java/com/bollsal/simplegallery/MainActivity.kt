@@ -1,10 +1,10 @@
-package com.bollsal.simplegallery.feature.main
+package com.bollsal.simplegallery
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.bollsal.simplegallery.feature.main.gallery.GalleryScreen
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +14,8 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
 
     setContent {
-      GalleryScreen()
+      val navController = rememberNavController()
+      NavigationModule(navController)
     }
   }
 }
