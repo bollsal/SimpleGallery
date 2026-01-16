@@ -31,8 +31,7 @@ class ImageLoader @Inject constructor(@ApplicationContext private val context: C
 
     diskCache = SimpleDiskLruCache(
       cacheDir = File(context.cacheDir, "image_cache"),
-      // TODO : 테스트할때는 캐시사이즈를 적게해서 하고 제출때는 좀 늘리는걸로..
-      cacheLimitSize = 1024 * 1024 * 10
+      cacheLimitSize = 1024 * 1024 * 50
     )
   }
 
@@ -73,7 +72,7 @@ class ImageLoader @Inject constructor(@ApplicationContext private val context: C
       val connection = URL(imageUrl).openConnection() as HttpURLConnection
       connection.connectTimeout = 10 * 1000
       connection.getInputStream().use { inputStream ->
-        if (isActive) { // TODO 이 부분은 필요할지 고민...캐시사이즈를 좀 늘리면 빼는게 좋을것같은
+        if (isActive) {
           diskCache.put(key = imageUrl, value = inputStream)
         }
       }
