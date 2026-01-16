@@ -22,7 +22,8 @@ data class Colors(
   val textColor: Color,
   val rippleColor: Color,
   val progressColor: Color,
-  val placeholder: Color
+  val placeholder: Color,
+  val disabled: Color
 )
 
 @Immutable
@@ -44,6 +45,7 @@ val LocalSimpleGalleryColor = staticCompositionLocalOf {
     rippleColor = Color.Unspecified,
     progressColor = Color.Unspecified,
     placeholder = Color.Unspecified,
+    disabled = Color.Unspecified
   )
 }
 
@@ -68,14 +70,16 @@ fun SimpleGalleryTheme(content: @Composable () -> Unit) {
     textColor = Color(0xFF000000),
     rippleColor = Color(0x08000000),
     progressColor = Color(0xFF000000),
-    placeholder = Color(0x08000000)
+    placeholder = Color(0x08000000),
+    disabled = Color(0x33000000)
   )
   val darkColor = Colors(
     background = Color(0xFF202020),
     textColor = Color(0xFFFFFFFF),
     rippleColor = Color(0x0FFFFFFF),
     progressColor = Color(0xFFFFFFFF),
-    placeholder = Color(0x0FFFFFFF)
+    placeholder = Color(0x0FFFFFFF),
+    disabled = Color(0x33ffffff)
   )
 
   val typography = Typography(
