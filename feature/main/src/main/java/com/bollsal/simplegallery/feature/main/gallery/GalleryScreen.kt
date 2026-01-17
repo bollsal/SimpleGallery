@@ -16,12 +16,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -34,7 +37,9 @@ import com.bollsal.simplegallery.feature.main.GalleryNavigation
 import com.bollsal.simplegallery.library.design.R
 import com.bollsal.simplegallery.library.design.composable.Empty
 import com.bollsal.simplegallery.library.design.composable.Error
+import com.bollsal.simplegallery.library.design.rememberInteractionSource
 import com.bollsal.simplegallery.library.design.shadowBy
+import com.bollsal.simplegallery.library.design.theme.LocalShapes
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 import kotlinx.collections.immutable.toPersistentList
@@ -78,9 +83,13 @@ fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
           title = {
             Text(
               modifier = Modifier
+                .clip(LocalShapes.current.radius8)
                 .clickable(
+                  interactionSource = rememberInteractionSource(),
+                  indication = ripple(color = LocalSimpleGalleryColor.current.rippleColor),
                   onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } }
-                ),
+                )
+                .padding(4.dp),
               text = "Gallery",
               color = LocalSimpleGalleryColor.current.textColor
             )
