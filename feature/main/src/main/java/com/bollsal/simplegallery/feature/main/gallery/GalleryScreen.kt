@@ -1,6 +1,7 @@
 package com.bollsal.simplegallery.feature.main.gallery
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -36,11 +38,13 @@ import com.bollsal.simplegallery.library.design.shadowBy
 import com.bollsal.simplegallery.library.design.theme.LocalSimpleGalleryColor
 import com.bollsal.simplegallery.library.design.theme.SimpleGalleryTheme
 import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
   SimpleGalleryTheme {
+    val coroutineScope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
     val listState = rememberLazyGridState()
 
@@ -73,6 +77,10 @@ fun GalleryScreen(navigation: (GalleryNavigation) -> Unit) {
           modifier = Modifier.shadowBy(listState),
           title = {
             Text(
+              modifier = Modifier
+                .clickable(
+                  onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } }
+                ),
               text = "Gallery",
               color = LocalSimpleGalleryColor.current.textColor
             )
